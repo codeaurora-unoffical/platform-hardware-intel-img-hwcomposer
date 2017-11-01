@@ -23,6 +23,9 @@ LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_SHARED_LIBRARIES := liblog libcutils libdrm \
                           libwsbm libutils libhardware \
                           libva libva-tpi libva-android libsync
+
+LOCAL_HEADER_LIBRARIES := libsystem_headers
+
 LOCAL_SRC_FILES := \
     ../../common/base/Drm.cpp \
     ../../common/base/HwcLayer.cpp \
@@ -130,8 +133,10 @@ ifeq ($(TARGET_HAS_MULTIPLE_DISPLAY),true)
 endif
 
 LOCAL_COPY_HEADERS := \
-    ../../include/pvr/hal/hal_public.h \
-    ../../include/pvr/hal/img_gralloc_public.h
+    ../../include/pvr/hal/img_gralloc.h \
+    ../../include/pvr/hal/img_gralloc1.h \
+    ../../include/pvr/hal/img_gralloc_common_public.h \
+    ../../include/pvr/hal/hal_public.h
 LOCAL_COPY_HEADERS_TO := pvr/hal
 
 ifneq ($(TARGET_BUILD_VARIANT),user)

@@ -23,7 +23,7 @@ include $(CLEAR_VARS)
 # HwcModule.cpp uses GNU old-style field designator extension.
 LOCAL_CLANG_CFLAGS += -Wno-gnu-designator
 
-LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
+LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := hwcomposer.$(TARGET_BOARD_PLATFORM)
 LOCAL_CFLAGS := -Werror
@@ -31,6 +31,8 @@ LOCAL_CFLAGS := -Werror
 LOCAL_SHARED_LIBRARIES := liblog libcutils libdrm \
                           libwsbm libutils libhardware \
                           libva libva-tpi libva-android libsync
+
+LOCAL_HEADER_LIBRARIES := libsystem_headers
 
 LOCAL_SRC_FILES := \
     common/base/Drm.cpp \
@@ -96,13 +98,19 @@ LOCAL_C_INCLUDES := \
     $(TARGET_OUT_HEADERS)/libttm \
     frameworks/native/include/media/openmax
 
+# Use the frozen version of ion.h.
+LOCAL_C_INCLUDES += \
+    $(TOP)/system/core/libion/kernel-headers \
+
 ifeq ($(TARGET_SUPPORT_HDMI_PRIMARY),true)
    LOCAL_CFLAGS += -DINTEL_SUPPORT_HDMI_PRIMARY
 endif
 
 LOCAL_COPY_HEADERS := \
- include/pvr/hal/hal_public.h \
- include/pvr/hal/img_gralloc_public.h
+ include/pvr/hal/img_gralloc.h \
+ include/pvr/hal/img_gralloc1.h \
+ include/pvr/hal/img_gralloc_common_public.h \
+ include/pvr/hal/hal_public.h
 LOCAL_COPY_HEADERS_TO := pvr/hal
 
 include $(BUILD_SHARED_LIBRARY)
