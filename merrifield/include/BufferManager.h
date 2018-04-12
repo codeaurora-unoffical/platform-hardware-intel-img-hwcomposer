@@ -72,7 +72,6 @@ private:
         DEFAULT_BUFFER_POOL_SIZE = 128,
     };
 
-    alloc_device_t *mAllocDev;
     KeyedVector<buffer_handle_t, BufferMapper*> mFrameBuffers;
     BufferCache *mBufferPool;
     DataBuffer *mDataBuffer;

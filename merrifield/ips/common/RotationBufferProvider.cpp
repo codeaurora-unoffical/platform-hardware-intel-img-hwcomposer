@@ -381,7 +381,6 @@ bool RotationBufferProvider::setupRotationBuffer(VideoPayloadBuffer *payload, in
     uint32_t setup_Begin = getMilliseconds();
 #endif
     VAStatus vaStatus;
-    int stride;
     bool ret = false;
 
     if (payload->format != VA_FOURCC_NV12 || payload->width == 0 || payload->height == 0) {

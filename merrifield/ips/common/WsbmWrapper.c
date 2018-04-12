@@ -157,7 +157,6 @@ int psbWsbmAllocateFromUB(uint32_t size, uint32_t align, void ** buf, void *user
 {
     struct _WsbmBufferObject * wsbmBuf = NULL;
     int ret = 0;
-    int offset = 0;
 
     ATRACE("size %d", align_to(size, 4096));
 
@@ -196,7 +195,6 @@ int psbWsbmAllocateTTMBuffer(uint32_t size, uint32_t align, void ** buf)
 {
     struct _WsbmBufferObject * wsbmBuf = NULL;
     int ret = 0;
-    int offset = 0;
 
     ATRACE("size %d", align_to(size, 4096));
 
@@ -257,7 +255,7 @@ int psbWsbmWrapTTMBuffer(uint64_t handle, void **buf)
 
     *buf = (void *)wsbmBuf;
 
-    VTRACE("wrap buffer %p for handle %#x", wsbmBuf, handle);
+    VTRACE("wrap buffer %p for handle %#llx", wsbmBuf, handle);
     return 0;
 }
 
@@ -281,7 +279,7 @@ int psbWsbmWrapTTMBuffer2(uint64_t handle, void **buf)
 
     *buf = (void *)wsbmBuf;
 
-    VTRACE("wrap buffer %p for handle %#x", wsbmBuf, handle);
+    VTRACE("wrap buffer %p for handle %#llx", wsbmBuf, handle);
     return 0;
 }
 

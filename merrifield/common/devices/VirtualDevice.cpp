@@ -213,7 +213,7 @@ public:
         int format;
         VASurfaceAttributeTPI attribTpi;
         memset(&attribTpi, 0, sizeof(attribTpi));
-        VTRACE("Map khandle 0x%x size=%ux%u", khandle, stride, height);
+        VTRACE("Map khandle 0x%p size=%ux%u", khandle, stride, height);
         attribTpi.type = VAExternalMemoryKernelDRMBufffer;
         attribTpi.width = stride;
         attribTpi.height = height;
@@ -861,8 +861,6 @@ bool VirtualDevice::prepare(hwc_display_contents_1_t *display)
     const ssize_t fbTarget = display->numHwLayers-1;
     mRgbLayer = fbTarget;
     mYuvLayer = -1;
-
-    DisplayAnalyzer *analyzer = mHwc.getDisplayAnalyzer();
 
     mProtectedMode = false;
 #ifdef INTEL_WIDI
@@ -2327,8 +2325,6 @@ uint32_t VirtualDevice::getFpsDivider()
 
 void VirtualDevice::deinitialize()
 {
-    VAStatus va_status;
-
     if (mPayloadManager) {
         delete mPayloadManager;
         mPayloadManager = NULL;

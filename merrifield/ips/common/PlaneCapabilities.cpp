@@ -79,8 +79,6 @@ bool PlaneCapabilities::isFormatSupported(int planeType, HwcLayer *hwcLayer)
 bool PlaneCapabilities::isSizeSupported(int planeType, HwcLayer *hwcLayer)
 {
     uint32_t format = hwcLayer->getFormat();
-    uint32_t w = hwcLayer->getBufferWidth();
-    uint32_t h = hwcLayer->getBufferHeight();
     const stride_t& stride = hwcLayer->getBufferStride();
 
     bool isYUVPacked;

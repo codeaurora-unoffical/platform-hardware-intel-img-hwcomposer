@@ -208,18 +208,6 @@ static int hwc_setActiveConfig(hwc_composer_device_1_t *dev, int disp, int index
     return 0;
 }
 
-static int hwc_setCursorPositionAsync(hwc_composer_device_1_t *dev, int disp, int x, int y)
-{
-    GET_HWC_RETURN_ERROR_IF_NULL();
-    bool ret = hwc->setCursorPositionAsync(disp, x, y);
-    if (ret == false) {
-        WTRACE("failed to set cursor position of disp %d", disp);
-        return -EINVAL;
-    }
-
-    return 0;
-}
-
 //------------------------------------------------------------------------------
 
 static int hwc_device_open(const struct hw_module_t* module,
@@ -281,19 +269,19 @@ static int hwc_device_open(const struct hw_module_t* module,
 } // namespace android
 
 static struct hw_module_methods_t hwc_module_methods = {
-    open: android::intel::hwc_device_open
+    .open = android::intel::hwc_device_open
 };
 
 hwc_module_t HAL_MODULE_INFO_SYM = {
-    common: {
-        tag: HARDWARE_MODULE_TAG,
-        version_major: 1,
-        version_minor: 4,
-        id: HWC_HARDWARE_MODULE_ID,
-        name: "Intel Hardware Composer",
-        author: "Intel",
-        methods: &hwc_module_methods,
-        dso: NULL,
-        reserved: {0},
+    .common = {
+        .tag = HARDWARE_MODULE_TAG,
+        .version_major = 1,
+        .version_minor = 4,
+        .id = HWC_HARDWARE_MODULE_ID,
+        .name = "Intel Hardware Composer",
+        .author = "Intel",
+        .methods = &hwc_module_methods,
+        .dso = NULL,
+        .reserved = {0},
     }
 };

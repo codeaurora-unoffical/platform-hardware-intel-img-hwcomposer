@@ -610,7 +610,7 @@ bool Drm::setDrmMode(int index, drmModeModeInfoPtr mode)
     // We use bo_handles[0] and bo_handles[1] to store buffer_handle_t
     // to support 32 and 64 platforms.
     bo_handles[0] = ((unsigned long)(output->fbHandle)) & 0xffffffff;
-    bo_handles[1] = ((unsigned long)(output->fbHandle) >> 32) & 0xffffffff;
+    bo_handles[1] = (sizeof(long) == 4) ? 0 : ((unsigned long)(output->fbHandle) >> 32) & 0xffffffff;
     pitches[0] = stride * DrmConfig::getFrameBufferBpp() / 8;
 
     ret = drmModeAddFB2(

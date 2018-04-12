@@ -333,7 +333,6 @@ void DisplayAnalyzer::postVideoEvent(int instanceID, int state)
         (state == VIDEO_PLAYBACK_STOPPING && mProtectedVideoSession)) {
         Hwcomposer::getInstance().invalidate();
         mOverlayAllowed = false;
-        hwc_display_contents_1_t *content = NULL;
         for (int i = 0; i < (int)mCachedNumDisplays; i++) {
             setCompositionType(i, HWC_FRAMEBUFFER, true);
         }
@@ -555,7 +554,6 @@ void DisplayAnalyzer::handleVideoEvent(int instanceID, int state)
     }
 
     if (reset) {
-        hwc_display_contents_1_t *content = NULL;
         for (int i = 0; i < (int)mCachedNumDisplays; i++) {
             setCompositionType(i, HWC_FRAMEBUFFER, true);
         }
@@ -813,7 +811,6 @@ bool DisplayAnalyzer::isPresentationLayer(hwc_layer_1_t &layer)
 
 bool DisplayAnalyzer::hasProtectedLayer()
 {
-    DataBuffer * buffer = NULL;
     hwc_display_contents_1_t *content = NULL;
     BufferManager *bm = Hwcomposer::getInstance().getBufferManager();
 

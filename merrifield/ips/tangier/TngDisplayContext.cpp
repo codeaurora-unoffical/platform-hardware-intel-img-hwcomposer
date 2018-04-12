@@ -120,7 +120,7 @@ bool TngDisplayContext::commitContents(hwc_display_contents_1_t *display, HwcLay
             memset(&ctx->zorder, 0, sizeof(ctx->zorder));
         }
 
-        VTRACE("count %p, handle %#x, trans %#x, blending %#x"
+        VTRACE("count %d, handle %p, trans %#x, blending %#x"
               " sourceCrop %f,%f - %fx%f, dst %d,%d - %dx%d, custom %#x",
               mCount,
               imgLayer->psLayer->handle,
@@ -213,7 +213,7 @@ bool TngDisplayContext::commitEnd(size_t numDisplays, hwc_display_contents_1_t *
 
         // log for layer fence status
         for (size_t j = 0; j < displays[i]->numHwLayers; j++) {
-            VTRACE("handle %#p, acquiredFD %d, releaseFD %d",
+            VTRACE("handle %p, acquiredFD %d, releaseFD %d",
                  displays[i]->hwLayers[j].handle,
                  displays[i]->hwLayers[j].acquireFenceFd,
                  displays[i]->hwLayers[j].releaseFenceFd);

@@ -53,7 +53,6 @@ public:
     // wait idle
     bool waitIdle();
 private:
-    int mRefCount;
     Wsbm& mWsbm;
     void* mBufferObject;
 

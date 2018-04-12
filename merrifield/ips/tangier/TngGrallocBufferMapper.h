@@ -41,8 +41,7 @@ private:
 
 private:
     const hw_device_t& mGralloc;
-    void* mBufferObject;
-	native_handle_t* mClonedHandle;
+    native_handle_t* mClonedHandle;
 };
 
 } // namespace intel

@@ -21,7 +21,6 @@ namespace intel {
 
 TTMBufferMapper::TTMBufferMapper(Wsbm& wsbm, DataBuffer& buffer)
     : BufferMapper(buffer),
-      mRefCount(0),
       mWsbm(wsbm),
       mBufferObject(0),
       mGttOffsetInPage(0),

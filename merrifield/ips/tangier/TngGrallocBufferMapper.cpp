@@ -25,8 +25,7 @@ namespace intel {
 TngGrallocBufferMapper::TngGrallocBufferMapper(const hw_device_t& gralloc,
                                                DataBuffer& buffer)
     : GrallocBufferMapperBase(buffer),
-      mGralloc(gralloc),
-      mBufferObject(0)
+      mGralloc(gralloc)
 {
     CTRACE();
 
@@ -34,7 +33,7 @@ TngGrallocBufferMapper::TngGrallocBufferMapper(const hw_device_t& gralloc,
 
 	mClonedHandle = native_handle_create(h->numFds, h->numInts);
 	if (mClonedHandle == 0) {
-		ALOGE("%s:Failed to create handle, out of memory!");
+		ALOGE("Failed to create handle, out of memory!");
 		return;
 	}
 	for (int i = 0; i < h->numFds; i++)

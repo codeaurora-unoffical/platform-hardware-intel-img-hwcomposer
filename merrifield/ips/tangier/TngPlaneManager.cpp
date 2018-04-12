@@ -131,7 +131,7 @@ bool TngPlaneManager::assignPlanes(int dsp, ZOrderConfig& config)
     }
 
     if (config.size() == 1 && config[0]->planeType == DisplayPlane::PLANE_SPRITE) {
-        config[0]->planeType == DisplayPlane::PLANE_PRIMARY;
+        config[0]->planeType = DisplayPlane::PLANE_PRIMARY;
     }
 
     // allocate planes

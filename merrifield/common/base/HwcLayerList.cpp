@@ -69,7 +69,7 @@ bool HwcLayerList::checkSupported(int planeType, HwcLayer *hwcLayer)
     }
 
     // check usage
-    if (!hwcLayer->getUsage() & GRALLOC_USAGE_HW_COMPOSER) {
+    if (!(hwcLayer->getUsage() & GRALLOC_USAGE_HW_COMPOSER)) {
         WTRACE("not a composer layer");
         return false;
     }
@@ -614,12 +614,12 @@ bool HwcLayerList::useAsFrameBufferTarget(HwcLayer *target)
     }
 
     // check candidate and noncandidate layers above this candidate does not overlap
-    for (int above = targetLayerIndex + 1; above < mFBLayers.size(); above++) {
+    for (unsigned int above = targetLayerIndex + 1; above < mFBLayers.size(); above++) {
         if (mFBLayers[above]->mPlaneCandidate) {
             continue;
         } else {
             // check candidate layer below this noncandidate layer does not overlap
-            for (int below = targetLayerIndex + 1; below < above; below++) {
+            for (unsigned int below = targetLayerIndex + 1; below < above; below++) {
                 if (mFBLayers[below]->mPlaneCandidate == false) {
                     continue;
                 }
@@ -750,6 +750,7 @@ bool HwcLayerList::setupSmartComposition2()
     HwcLayer *hwcLayer = NULL;
     int layerIndex = 0;
     int i = 0;
+    unsigned int u = 0;
 
     if (mList->flags & HWC_GEOMETRY_CHANGED) {
         // clear static layers vector once geometry changed
@@ -760,8 +761,8 @@ bool HwcLayerList::setupSmartComposition2()
 
     if (mStaticLayersIndex.size() > 0) {
         // exit criteria: once either static layer has update
-        for (i = 0; i < mStaticLayersIndex.size(); i++) {
-            layerIndex = mStaticLayersIndex.itemAt(i);
+        for (u = 0; u < mStaticLayersIndex.size(); u++) {
+            layerIndex = mStaticLayersIndex.itemAt(u);
             hwcLayer = mLayers.itemAt(layerIndex);
 
             if (hwcLayer->isUpdated()) {
@@ -770,8 +771,8 @@ bool HwcLayerList::setupSmartComposition2()
         }
 
         if (ret == true) {
-            for (i = 0; i < mStaticLayersIndex.size(); i++) {
-                layerIndex = mStaticLayersIndex.itemAt(i);
+            for (u = 0; u < mStaticLayersIndex.size(); u++) {
+                layerIndex = mStaticLayersIndex.itemAt(u);
                 hwcLayer = mLayers.itemAt(layerIndex);
 
                 hwcLayer->setCompositionType(HWC_FRAMEBUFFER);
@@ -799,7 +800,7 @@ bool HwcLayerList::setupSmartComposition2()
             //    1. If two connected, can trigger smart composition2
             //    2. Caculate layer size to see if it saves more bandwidth
             //    3. Dynamically check and add new static layers
-            int staticLayerCount = mStaticLayersIndex.size();
+            int staticLayerCount = (int)mStaticLayersIndex.size();
 
             if (staticLayerCount > 1 && staticLayerCount < mLayerCount-1) {
                 layerIndex = mStaticLayersIndex.itemAt(0);
@@ -846,8 +847,6 @@ bool HwcLayerList::setupSmartComposition2()
 
 bool HwcLayerList::update(hwc_display_contents_1_t *list)
 {
-    bool ret;
-
     // basic check to make sure the consistance
     if (!list) {
         ETRACE("null layer list");

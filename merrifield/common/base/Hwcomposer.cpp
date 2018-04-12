@@ -162,7 +162,7 @@ bool Hwcomposer::setPowerMode(int disp, int mode)
         return false;
     }
 
-    if(disp >= mDisplayDevices.size()){
+    if(disp >= (int)mDisplayDevices.size()){
         ETRACE("no device found");
         return false;
     }
@@ -261,7 +261,7 @@ bool Hwcomposer::getDisplayConfigs(int disp,
         return false;
     }
 
-    if(disp >= mDisplayDevices.size()){
+    if(disp >= (int)mDisplayDevices.size()){
         ETRACE("no device found");
         return false;
     }
@@ -286,7 +286,7 @@ bool Hwcomposer::getDisplayAttributes(int disp,
         ETRACE("invalid disp %d", disp);
         return false;
     }
-    if(disp >= mDisplayDevices.size()){
+    if(disp >= (int)mDisplayDevices.size()){
         ETRACE("no device found");
         return false;
     }
@@ -312,7 +312,7 @@ bool Hwcomposer::compositionComplete(int disp)
 
     mDisplayContext->compositionComplete();
 
-    if(disp >= mDisplayDevices.size()){
+    if(disp >= (int)mDisplayDevices.size()){
         ETRACE("no device found");
         return false;
     }

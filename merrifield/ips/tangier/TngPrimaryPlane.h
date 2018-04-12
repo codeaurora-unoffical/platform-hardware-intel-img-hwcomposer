@@ -29,6 +29,8 @@ public:
     bool setDataBuffer(buffer_handle_t handle);
     void setZOrderConfig(ZOrderConfig& config, void *nativeConfig);
     bool assignToDevice(int disp);
+protected:
+    using TngSpritePlane::setDataBuffer;
 private:
     void setFramebufferTarget(buffer_handle_t handle);
     bool enablePlane(bool enabled);
